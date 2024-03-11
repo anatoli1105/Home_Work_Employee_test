@@ -8,31 +8,37 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.awt.List;
 import java.util.*;
 
 import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-public class deportmentServiseTest {
+public class DeportmentServiseTest {
+
+
     @Mock
     EmployeeServis employeeServis;
+   // Employee employee;
     @InjectMocks
     DeportamentServis deportamentServis;
+
     @BeforeEach
 
+
     void setUp(){
-        List employee = new List();
-        var employee1=new Employee("ivan2","ivanova",455,6);
+Employee employee1;
 
-        employee.add(String.valueOf(employee1));
-        employee.add(String.valueOf(new Employee("Gary","Potter",445,2)));
-         employee.add(String.valueOf(new Employee("Gary","Potter2",447,2)));
-         employee.add(String.valueOf(new Employee("Pit","Ivanov",4575,9)));
+List<Employee> employee= new List<>();
+
+        employee.add(new Employee("Gary","Potter",445,2));
+         employee.add(new Employee("Gary","Potter2",447,2));
+         employee.add(new Employee("Pit","Ivanov",4575,9));
 
 
 
-                when(employeeServis.list()).thenReturn((Collection<Employee>) employee);
+             when(employeeServis.list()).thenReturn(employee);
+
+
     }
 
     @Test
@@ -51,28 +57,16 @@ public class deportmentServiseTest {
     }
     @Test
     void deportamentTestForFind(){
-        var actual=deportamentServis.deportamentWorks(2);
-       // assertThat(actual).containsExactlyInAnyOrder(
-              //  (new Employee("Gary","Potter",445,2)),
-                //(new Employee("Gary","Potter2",447,2));
-       // );
+       assertThat(deportamentServis.deportamentWorks(2)).containsExactlyInAnyOrder(
+                (new Employee("Gary","Potter",445,2)),
+                (new Employee("Gary","Potter2",447,2)));
+
 
 
     }
     @Test
     void findWorksDeportamentTest(){
-        var actual=deportamentServis.findDeportamentWorks();
-        Map<Employee,Employee> expected =new HashMap<>();
-        expected.put((new Employee("ivan2","ivanova",455,6)),
-                (new Employee("ivan2","ivanova",455,6)));
-        expected.put((new Employee("Gary","Potter",445,2)),
-                (new Employee("Gary","Potter",445,2)));
 
-        expected.put((new Employee("Gary","Potter2",447,2)),
-                  (new Employee("Gary","Potter2",447,2)));
-
-        expected.put((new Employee("Pit","Ivanov",4575,9)),
-                (new Employee("Pit","Ivanov",4575,9)));
         Assertions.assertEquals(deportamentServis.maxSalaryDeportament(2), 447);
     }
 

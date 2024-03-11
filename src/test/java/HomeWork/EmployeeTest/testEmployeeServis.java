@@ -17,7 +17,7 @@ public class testEmployeeServis {
 
 
 
-    public EmployeeServis employeeServis= new EmployeeServis();
+   public EmployeeServis employeeServis= new EmployeeServis();
 
     @Test
     void add() {
@@ -48,8 +48,12 @@ public class testEmployeeServis {
     }
     @Test
     void getAllForEmployeeServis(){
+        var actual1=employeeServis.list();
+
+
+
         employeeServis.addWorker("Ivan","Ivanov",45,2);
         employeeServis.addWorker("ivan2","ivanova",455,6);
-        employeeServis.list();
+        Assertions.assertEquals(actual1,employeeServis.list());
     }
 }
